@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Afruyz Notes | Capture Ideas. Organize Life.</title>
+    <title>Afruyz Notes | Professional Edition</title>
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -16,45 +16,43 @@
     <style>
         :root {
             /* Light Theme Variables */
-            --bg-color: #F9FAFB;
+            --bg-color: #F3F4F6;
             --card-bg: #FFFFFF;
             --text-main: #111827;
             --text-muted: #6B7280;
-            --border-color: #E5E7EB;
+            --border-color: #D1D5DB; /* Sharper border for light mode */
+            --border-hover: #6C63FF;
             --primary: #6C63FF;
             --primary-hover: #5A52D9;
             --secondary: #8B80FF;
-            --accent-mint: #10B981;
-            --accent-orange: #F59E0B;
-            --accent-pink: #EF4444;
             --sidebar-width: 280px;
             
-            /* Modern Refined Shadows */
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --shadow-primary: 0 8px 16px -4px rgba(108, 99, 255, 0.3);
+            /* Professional App Shadows & Glows */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --shadow-glow: 0 0 0 3px rgba(108, 99, 255, 0.15);
+            --shadow-card-hover: 0 12px 24px -8px rgba(108, 99, 255, 0.25);
             
-            --radius-sm: 8px;
-            --radius-md: 12px;
-            --radius-lg: 16px;
+            --radius-sm: 10px;
+            --radius-md: 16px;
+            --radius-lg: 20px;
             
-            /* Apple-like Spring Animations */
+            /* Smooth Cinematic Transitions */
             --transition-fast: 0.15s ease;
-            --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-bounce: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            --transition-normal: 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+            --transition-spring: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         [data-theme="dark"] {
-            --bg-color: #111118;
-            --card-bg: #1C1C24;
+            --bg-color: #0F0F13;
+            --card-bg: #18181C;
             --text-main: #F9FAFB;
             --text-muted: #9CA3AF;
-            --border-color: #2D2D3A;
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
-            --shadow-hover: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
-            --shadow-primary: 0 8px 16px -4px rgba(108, 99, 255, 0.2);
+            --border-color: #374151; /* Distinct border for dark mode */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+            --shadow-glow: 0 0 0 3px rgba(108, 99, 255, 0.25);
+            --shadow-card-hover: 0 12px 24px -8px rgba(108, 99, 255, 0.4);
         }
 
         * { 
@@ -63,6 +61,12 @@
             box-sizing: border-box; 
             font-family: 'Inter', sans-serif; 
         }
+        
+        /* Custom Elegant Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
         
         body {
             background-color: var(--bg-color);
@@ -75,20 +79,35 @@
             transition: background-color var(--transition-normal), color var(--transition-normal);
         }
 
-        /* Typography */
-        h1, h2, h3, h4 { color: var(--text-main); font-weight: 700; letter-spacing: -0.025em; }
+        h1, h2, h3, h4 { color: var(--text-main); font-weight: 700; letter-spacing: -0.03em; }
         p { color: var(--text-muted); line-height: 1.6; }
 
-        /* Sidebar */
+        /* Animation Keyframes for Staggered Entrance */
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(20px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes borderPulse {
+            0% { border-color: var(--border-color); }
+            50% { border-color: var(--primary); }
+            100% { border-color: var(--border-color); }
+        }
+
+        /* Sidebar - Fully Boxed */
         #sidebar {
             width: var(--sidebar-width);
-            height: 100%;
+            height: calc(100vh - 24px);
+            margin: 12px;
+            border-radius: var(--radius-lg);
             background-color: var(--card-bg);
-            border-right: 1px solid var(--border-color);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
             display: flex;
             flex-direction: column;
             transition: all var(--transition-normal);
             z-index: 50;
+            overflow: hidden;
         }
         
         .sidebar-header {
@@ -96,79 +115,73 @@
             display: flex;
             align-items: center;
             gap: 14px;
+            border-bottom: 1px solid var(--border-color);
         }
         
         .brand-logo {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
             object-fit: cover;
-            box-shadow: var(--shadow-sm);
-            transition: transform var(--transition-bounce), box-shadow var(--transition-fast);
-            cursor: pointer;
+            transition: transform var(--transition-spring), border-color var(--transition-fast);
         }
         
-        .brand-logo:hover {
-            transform: scale(1.05) rotate(4deg);
-            box-shadow: var(--shadow-primary);
+        .sidebar-header:hover .brand-logo {
+            transform: scale(1.08) rotate(5deg);
+            border-color: var(--primary);
         }
 
-        .brand-text { 
-            font-size: 1.25rem; 
-            font-weight: 800; 
-            letter-spacing: -0.02em; 
-            color: var(--text-main); 
-        }
+        .brand-text { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.02em; }
         
         .nav-menu { 
-            padding: 8px 12px; 
+            padding: 16px 12px; 
             flex: 1; 
             overflow-y: auto; 
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 6px;
         }
 
         .nav-item {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 10px 14px;
+            padding: 12px 16px;
             border-radius: var(--radius-sm);
+            border: 1px solid transparent; /* Prepare for hover border */
             color: var(--text-muted);
             text-decoration: none;
             cursor: pointer;
-            transition: all var(--transition-fast);
-            font-weight: 500;
+            transition: all var(--transition-normal);
+            font-weight: 600;
             font-size: 0.9375rem;
         }
 
-        .nav-item i { 
-            color: inherit; 
-            width: 18px; 
-            height: 18px;
-            transition: transform var(--transition-bounce); 
-        }
+        .nav-item i { width: 18px; height: 18px; transition: transform var(--transition-spring); }
         
         .nav-item:hover { 
             background-color: var(--bg-color); 
+            border-color: var(--border-color);
             color: var(--text-main);
+            transform: translateX(4px);
         }
         
         .nav-item.active {
             background-color: var(--primary);
+            border-color: var(--primary);
             color: #FFFFFF;
-            box-shadow: var(--shadow-primary);
+            box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3);
         }
         
-        .nav-item:hover i { transform: scale(1.1); }
+        .nav-item:hover i { transform: scale(1.15); }
 
         .btn-new-note {
-            margin: 0 20px 20px;
+            margin: 20px;
             padding: 14px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: #FFFFFF;
-            border: none;
+            border: 1px solid rgba(255,255,255,0.2);
             border-radius: var(--radius-md);
             font-weight: 600;
             font-size: 0.9375rem;
@@ -177,27 +190,23 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            transition: all var(--transition-bounce);
-            box-shadow: var(--shadow-primary);
-        }
-
-        .btn-new-note i {
-            width: 18px;
-            height: 18px;
+            transition: all var(--transition-spring);
+            box-shadow: 0 4px 15px rgba(108, 99, 255, 0.4);
         }
 
         .btn-new-note:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px -4px rgba(108, 99, 255, 0.4);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: var(--shadow-card-hover);
+            border-color: #FFF;
         }
 
         .settings-label {
-            margin: 24px 0 8px 14px; 
-            font-size: 0.75rem; 
+            margin: 24px 0 8px 16px; 
+            font-size: 0.7rem; 
             text-transform: uppercase; 
             color: var(--text-muted); 
-            font-weight: 700; 
-            letter-spacing: 0.05em;
+            font-weight: 800; 
+            letter-spacing: 0.1em;
         }
 
         /* Main Content */
@@ -209,100 +218,86 @@
             position: relative;
         }
         
+        /* Glassmorphism Top Bar with Border */
         .top-bar {
-            height: 72px;
-            padding: 0 32px;
+            height: 80px;
+            padding: 0 40px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            background-color: rgba(var(--bg-color-rgb), 0.8); /* Requires JS to inject RGB if needed, using fallback */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-color);
-            background-color: var(--card-bg);
             z-index: 40;
+            margin: 12px 12px 0 0;
+            border-radius: var(--radius-lg);
+            background: var(--card-bg);
+            box-shadow: var(--shadow-sm);
         }
 
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-main);
-            cursor: pointer;
-            padding: 8px;
-        }
-        
         .search-container {
             position: relative;
-            width: 320px;
+            width: 350px;
             display: flex;
             align-items: center;
-            transition: width var(--transition-normal);
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            transition: all var(--transition-normal);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
         }
         
         .search-container:focus-within {
-            width: 400px;
+            width: 450px;
+            border-color: var(--primary);
+            box-shadow: var(--shadow-glow);
+            background: var(--card-bg);
         }
         
         .search-container i {
             position: absolute;
             left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
             color: var(--text-muted);
             width: 18px;
             height: 18px;
-            transition: color var(--transition-fast);
-            pointer-events: none;
+            transition: color var(--transition-normal);
         }
         
         .search-container:focus-within i { color: var(--primary); }
         
         .search-input {
             width: 100%;
-            padding: 10px 16px 10px 42px;
-            border-radius: 20px;
-            border: 1px solid var(--border-color);
-            background-color: var(--bg-color);
+            padding: 12px 16px 12px 44px;
+            border: none;
+            background: transparent;
             color: var(--text-main);
             font-size: 0.9375rem;
             outline: none;
-            transition: all var(--transition-fast);
         }
         
-        .search-input:focus { 
-            border-color: var(--primary);
-            background-color: var(--card-bg);
-            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
-        }
-        
-        .top-actions { 
-            display: flex; 
-            gap: 12px; 
-            align-items: center; 
-        }
+        .top-actions { display: flex; gap: 12px; align-items: center; }
         
         .icon-btn {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             color: var(--text-muted);
             cursor: pointer;
-            padding: 8px;
-            border-radius: 50%;
+            padding: 10px;
+            border-radius: var(--radius-sm);
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all var(--transition-bounce);
-        }
-        
-        .icon-btn i {
-            width: 18px;
-            height: 18px;
+            transition: all var(--transition-spring);
+            box-shadow: var(--shadow-sm);
         }
 
         .icon-btn:hover { 
             background-color: var(--primary); 
             color: #FFFFFF; 
             border-color: var(--primary);
-            transform: translateY(-2px); 
-            box-shadow: var(--shadow-primary);
+            transform: translateY(-3px) scale(1.05); 
+            box-shadow: var(--shadow-glow);
         }
 
         /* Views */
@@ -313,121 +308,126 @@
             display: none;
         }
         
-        .view-section.active { 
-            display: block; 
-            animation: fadeIn var(--transition-normal); 
-        }
+        .view-section.active { display: block; }
 
-        @keyframes fadeIn { 
-            from { opacity: 0; transform: translateY(8px); } 
-            to { opacity: 1; transform: translateY(0); } 
-        }
-
-        /* Dashboard */
-        .dashboard-header { margin-bottom: 32px; }
-        .dashboard-header h1 { font-size: 2rem; margin-bottom: 6px; }
-        .dashboard-header p { font-size: 0.9375rem; }
+        /* Dashboard Items - Fully Boxed & Animated */
+        .dashboard-header { margin-bottom: 40px; animation: fadeSlideUp 0.5s both; }
+        .dashboard-header h1 { font-size: 2.2rem; margin-bottom: 8px; }
         
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 24px;
             margin-bottom: 48px;
         }
         
         .stat-card {
-            padding: 20px;
-            border-radius: var(--radius-md);
+            padding: 24px;
+            border-radius: var(--radius-lg);
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             display: flex;
             align-items: center;
-            gap: 16px;
-            transition: all var(--transition-bounce);
-            box-shadow: var(--shadow-sm);
+            gap: 20px;
+            transition: all var(--transition-spring);
+            box-shadow: var(--shadow-md);
+            animation: fadeSlideUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
         }
         
+        /* Stagger stat cards */
+        .stat-card:nth-child(1) { animation-delay: 0.1s; }
+        .stat-card:nth-child(2) { animation-delay: 0.2s; }
+        .stat-card:nth-child(3) { animation-delay: 0.3s; }
+        
         .stat-card:hover { 
-            transform: translateY(-2px); 
-            box-shadow: var(--shadow-md); 
+            transform: translateY(-6px) scale(1.02); 
+            box-shadow: var(--shadow-card-hover); 
             border-color: var(--primary);
         }
         
         .stat-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
+            width: 54px;
+            height: 54px;
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.2);
             display: flex;
             align-items: center;
             justify-content: center;
             color: #FFFFFF;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            flex-shrink: 0;
-        }
-        
-        .stat-icon i {
-            width: 22px;
-            height: 22px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
-        .stat-info h3 { font-size: 1.5rem; margin-bottom: 2px; line-height: 1; }
-        .stat-info p { font-size: 0.875rem; font-weight: 500; margin: 0; color: var(--text-muted); }
+        .stat-info h3 { font-size: 1.8rem; line-height: 1; }
+        .stat-info p { font-size: 0.875rem; font-weight: 600; color: var(--text-muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.05em;}
 
-        /* Notes Grid */
+        /* Notes Grid - Uniform Borders & Hover States */
         .notes-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 24px;
         }
         
         .note-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 20px;
+            border-radius: var(--radius-lg);
+            padding: 24px;
             cursor: pointer;
-            position: relative;
-            transition: all var(--transition-bounce);
             display: flex;
             flex-direction: column;
-            min-height: 200px;
+            min-height: 220px;
             box-shadow: var(--shadow-sm);
+            transition: all var(--transition-spring);
+            position: relative;
+            overflow: hidden;
+            animation: fadeSlideUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
         }
         
+        /* Interactive border pulse on hover */
+        .note-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 4px;
+            background: var(--primary);
+            opacity: 0;
+            transition: opacity var(--transition-normal);
+        }
+
         .note-card:hover { 
-            transform: translateY(-3px); 
-            box-shadow: var(--shadow-hover); 
+            transform: translateY(-5px); 
+            box-shadow: var(--shadow-card-hover); 
             border-color: var(--primary); 
         }
+
+        .note-card:hover::before { opacity: 1; }
         
         .note-header { 
             display: flex; 
             justify-content: space-between; 
             align-items: flex-start; 
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             gap: 12px;
         }
         
         .note-title { 
-            font-size: 1.125rem; 
+            font-size: 1.15rem; 
             font-weight: 700; 
             color: var(--text-main); 
-            line-height: 1.3;
+            line-height: 1.4;
             display: -webkit-box; 
             -webkit-line-clamp: 2; 
             -webkit-box-orient: vertical; 
             overflow: hidden;
-            flex: 1;
         }
         
         .note-preview { 
-            font-size: 0.9375rem; 
+            font-size: 0.95rem; 
             color: var(--text-muted); 
             display: -webkit-box; 
             -webkit-line-clamp: 3; 
             -webkit-box-orient: vertical; 
             overflow: hidden;
-            line-height: 1.5;
+            line-height: 1.6;
         }
         
         .note-footer { 
@@ -436,43 +436,44 @@
             align-items: center; 
             margin-top: auto; 
             padding-top: 16px;
-            font-size: 0.8125rem; 
-            font-weight: 500;
+            font-size: 0.85rem; 
+            font-weight: 600;
             color: var(--text-muted); 
             border-top: 1px solid var(--border-color); 
         }
-        
-        .note-actions { 
-            display: flex; 
-            gap: 4px; 
-            align-items: center;
-        }
-        
+
         .note-actions .icon-btn {
-            padding: 6px;
-            background: transparent;
+            padding: 8px;
+            background: var(--bg-color);
+            border: 1px solid transparent;
             box-shadow: none;
-            border: none;
         }
         
         .note-actions .icon-btn:hover {
-            background: var(--bg-color);
+            background: var(--card-bg);
+            border-color: var(--primary);
             color: var(--primary);
-            transform: scale(1.1);
+            transform: scale(1.15) rotate(5deg);
         }
 
-        /* Editor */
+        /* Fully Boxed Editor */
         .editor-container {
-            max-width: 860px;
-            margin: 0 auto;
+            max-width: 900px;
+            margin: 0 auto 40px auto;
             background: var(--card-bg);
-            border-radius: var(--radius-md);
+            border-radius: var(--radius-lg);
             box-shadow: var(--shadow-md);
             border: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
-            height: calc(100vh - 150px);
-            animation: fadeIn var(--transition-normal);
+            height: calc(100vh - 200px);
+            animation: fadeSlideUp 0.5s both;
+            transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+        }
+
+        .editor-container:focus-within {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-glow);
         }
         
         .editor-header {
@@ -481,101 +482,56 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 20px;
+            background: var(--bg-color);
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
         }
         
         .editor-title-input {
-            font-size: 1.75rem;
+            font-size: 1.8rem;
             font-weight: 800;
-            letter-spacing: -0.02em;
             border: none;
             background: transparent;
             color: var(--text-main);
             outline: none;
             width: 100%;
-            font-family: 'Inter', sans-serif;
         }
         
-        .editor-title-input::placeholder { color: var(--text-muted); opacity: 0.6; }
-        
-        #editor-content { flex: 1; overflow-y: auto; }
-        
-        /* Clean up Quill defaults */
+        /* Restyle Quill bounds */
         .ql-toolbar.ql-snow { 
             border: none !important; 
             border-bottom: 1px solid var(--border-color) !important; 
-            background: var(--bg-color); 
-            border-radius: 0; 
-            padding: 12px 32px !important;
+            background: var(--card-bg); 
+            padding: 16px 32px !important;
         }
         
         .ql-container.ql-snow { 
             border: none !important; 
-            font-family: inherit !important; 
-            font-size: 1rem;
+            font-family: 'Inter', sans-serif !important; 
+            font-size: 1.05rem;
+            background: var(--card-bg);
+            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
         }
         
-        .ql-editor { padding: 32px; min-height: 100%; line-height: 1.7; color: var(--text-main); }
-        .ql-editor.ql-blank::before { color: var(--text-muted); font-style: normal; opacity: 0.6; }
+        .ql-editor { padding: 40px; min-height: 100%; line-height: 1.8; }
 
-        /* Toast */
-        #toast-container { 
-            position: fixed; 
-            bottom: 32px; 
-            right: 32px; 
-            z-index: 9999; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 12px; 
-        }
-        
+        /* Toast Notifications */
         .toast {
             background: var(--card-bg); 
-            border-left: 4px solid var(--primary);
-            padding: 14px 20px; 
+            border: 1px solid var(--border-color);
+            border-left: 5px solid var(--primary);
+            padding: 16px 24px; 
             border-radius: var(--radius-sm); 
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-card-hover);
             color: var(--text-main); 
-            font-weight: 500; 
-            font-size: 0.9375rem;
+            font-weight: 600; 
             display: flex; 
             align-items: center; 
-            gap: 12px;
-            animation: slideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, fadeOut 0.3s ease forwards 3s;
+            gap: 14px;
+            animation: slideIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, fadeOut 0.4s ease forwards 3s;
         }
 
-        .toast i { width: 18px; height: 18px; }
-        
         @keyframes slideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-        @keyframes fadeOut { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(8px); } }
-
-        /* Responsive */
-        @media (max-width: 900px) {
-            .mobile-menu-btn {
-                display: block;
-                margin-right: 16px;
-            }
-            
-            #sidebar { 
-                position: absolute; 
-                transform: translateX(-100%); 
-                box-shadow: var(--shadow-md); 
-            }
-            
-            #sidebar.open { transform: translateX(0); }
-            
-            .top-bar { padding: 0 20px; }
-            
-            .search-container { width: 100%; max-width: 220px; }
-            .search-container:focus-within { width: 100%; max-width: 280px; }
-            
-            .view-section { padding: 24px; }
-            .notes-grid { grid-template-columns: 1fr; }
-            .editor-container { height: calc(100vh - 110px); }
-            .editor-header { padding: 20px; }
-            .ql-editor { padding: 20px; }
-            .ql-toolbar.ql-snow { padding: 12px 20px !important; }
-        }
+        @keyframes fadeOut { from { opacity: 1; transform: translateY(0) scale(0.9); } to { opacity: 0; transform: translateY(15px) scale(0.8); } }
     </style>
 </head>
 <body>
@@ -588,7 +544,7 @@
         </div>
         
         <button class="btn-new-note" onclick="app.createNewNote()">
-            <i data-lucide="plus"></i> New Note
+            <i data-lucide="plus"></i> Create Note
         </button>
         
         <nav class="nav-menu">
@@ -605,7 +561,7 @@
                 <i data-lucide="archive"></i> Archive
             </a>
             
-            <div class="settings-label">Settings</div>
+            <div class="settings-label">Preferences</div>
             <a class="nav-item" onclick="app.toggleTheme()">
                 <i data-lucide="moon"></i> Toggle Theme
             </a>
@@ -615,14 +571,9 @@
     <!-- Main Content -->
     <main id="main-content">
         <header class="top-bar">
-            <div style="display: flex; align-items: center;">
-                <button class="mobile-menu-btn" onclick="app.toggleSidebar()">
-                    <i data-lucide="menu"></i>
-                </button>
-                <div class="search-container">
-                    <i data-lucide="search"></i>
-                    <input type="text" id="searchInput" class="search-input" placeholder="Search notes... (Ctrl+K)">
-                </div>
+            <div class="search-container">
+                <i data-lucide="search"></i>
+                <input type="text" id="searchInput" class="search-input" placeholder="Search your thoughts... (Ctrl+K)">
             </div>
             
             <div class="top-actions">
@@ -638,8 +589,8 @@
         <!-- Dashboard View -->
         <section id="view-dashboard" class="view-section active">
             <div class="dashboard-header">
-                <h1 id="greeting">Good Morning!</h1>
-                <p>Here's an overview of your notes and tasks.</p>
+                <h1 id="greeting">Good Morning</h1>
+                <p>Track your ideas and manage your daily notes efficiently.</p>
             </div>
             
             <div class="stats-grid">
@@ -653,7 +604,7 @@
                     </div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon" style="background: linear-gradient(135deg, #FBBF24, var(--accent-orange));">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #F59E0B, #D97706);">
                         <i data-lucide="star"></i>
                     </div>
                     <div class="stat-info">
@@ -662,7 +613,7 @@
                     </div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon" style="background: linear-gradient(135deg, #34D399, var(--accent-mint));">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #10B981, #059669);">
                         <i data-lucide="archive"></i>
                     </div>
                     <div class="stat-info">
@@ -672,8 +623,8 @@
                 </div>
             </div>
 
-            <h2>Recent Notes</h2>
-            <div class="notes-grid" id="recent-notes-grid" style="margin-top: 20px;">
+            <h2 style="margin-bottom: 24px; animation: fadeSlideUp 0.6s both; animation-delay: 0.4s;">Recent Notes</h2>
+            <div class="notes-grid" id="recent-notes-grid">
                 <!-- Auto-populated -->
             </div>
         </section>
@@ -692,9 +643,9 @@
         <section id="view-editor" class="view-section">
             <div class="editor-container">
                 <div class="editor-header">
-                    <input type="text" id="note-title-input" class="editor-title-input" placeholder="Title your thoughts...">
-                    <div class="note-actions">
-                        <button class="icon-btn" id="btn-save-note" onclick="app.saveCurrentNote()" title="Save (Ctrl+S)">
+                    <input type="text" id="note-title-input" class="editor-title-input" placeholder="Give your note a title...">
+                    <div class="top-actions">
+                        <button class="icon-btn" onclick="app.saveCurrentNote()" title="Save (Ctrl+S)">
                             <i data-lucide="save"></i>
                         </button>
                         <button class="icon-btn" onclick="app.switchView('notes')" title="Close">
@@ -707,27 +658,22 @@
         </section>
     </main>
 
-    <!-- Toast Container -->
-    <div id="toast-container"></div>
+    <div id="toast-container" style="position: fixed; bottom: 32px; right: 32px; z-index: 9999; display: flex; flex-direction: column; gap: 12px;"></div>
 
     <script>
-        // --- 1. CONFIGURATION & STATE ---
         const DB_NAME = 'AfruyzNotesDB';
         const DB_VERSION = 1;
-        let db;
-        let quill;
+        let db, quill;
         
         const state = {
             notes: [],
             currentNoteId: null,
-            currentFilter: 'all', // all, favorites, archive
+            currentFilter: 'all', 
             theme: localStorage.getItem('theme') || 'light'
         };
 
-        // --- 2. INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', async () => {
-            // Lock icon thickness globally for perfect visual balance
-            lucide.createIcons({ attrs: { 'stroke-width': 2 } });
+            lucide.createIcons({ attrs: { 'stroke-width': 2.2 } });
             applyTheme();
             initQuill();
             await initDB();
@@ -736,7 +682,6 @@
             setupEventListeners();
         });
 
-        // --- 3. DATABASE (IndexedDB) ---
         function initDB() {
             return new Promise((resolve, reject) => {
                 const request = indexedDB.open(DB_NAME, DB_VERSION);
@@ -782,15 +727,14 @@
             });
         }
 
-        // --- 4. EDITOR SETUP ---
         function initQuill() {
             quill = new Quill('#editor-content', {
                 theme: 'snow',
-                placeholder: 'Start writing your brilliant ideas...',
+                placeholder: 'Start typing here...',
                 modules: {
                     toolbar: [
                         [{ 'header': [1, 2, 3, false] }],
-                        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                        ['bold', 'italic', 'underline', 'strike'],
                         [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'list': 'check' }],
                         [{ 'color': [] }, { 'background': [] }],
                         ['link', 'image', 'code-block'],
@@ -803,22 +747,17 @@
             quill.on('text-change', () => {
                 if(!state.currentNoteId) return;
                 clearTimeout(timeout);
-                timeout = setTimeout(() => app.saveCurrentNote(false), 1000);
+                timeout = setTimeout(() => app.saveCurrentNote(false), 800);
             });
         }
 
-        // --- 5. APPLICATION LOGIC ---
         const app = {
             updateGreeting() {
                 const hour = new Date().getHours();
                 const greetingEl = document.getElementById('greeting');
-                if (hour < 12) greetingEl.innerText = 'Good Morning!';
-                else if (hour < 18) greetingEl.innerText = 'Good Afternoon!';
-                else greetingEl.innerText = 'Good Evening!';
-            },
-            
-            toggleSidebar() {
-                document.getElementById('sidebar').classList.toggle('open');
+                if (hour < 12) greetingEl.innerText = 'Good Morning';
+                else if (hour < 18) greetingEl.innerText = 'Good Afternoon';
+                else greetingEl.innerText = 'Good Evening';
             },
 
             async createNewNote() {
@@ -836,10 +775,8 @@
                 await saveNoteToDB(newNote);
                 state.notes.unshift(newNote);
                 this.openNote(newNote.id);
-                this.showToast('New note created');
+                this.showToast('New note created successfully');
                 updateUI();
-                
-                document.getElementById('sidebar').classList.remove('open');
             },
             
             openNote(id) {
@@ -861,12 +798,12 @@
                     note.updatedAt = Date.now();
                     await saveNoteToDB(note);
                     updateUI();
-                    if(showNotification) this.showToast('Note saved');
+                    if(showNotification) this.showToast('Note changes saved');
                 }
             },
             
             async deleteNote(id) {
-                if (confirm('Are you sure you want to delete this note?')) {
+                if (confirm('Permanently delete this note?')) {
                     await deleteNoteFromDB(id);
                     state.notes = state.notes.filter(n => n.id !== id);
                     if (state.currentNoteId === id) this.switchView('notes');
@@ -912,16 +849,15 @@
                 }
                 else if (viewName === 'favorites') { 
                     state.currentFilter = 'favorites'; 
-                    document.getElementById('notes-view-title').innerText = 'Favorites'; 
+                    document.getElementById('notes-view-title').innerText = 'Favorite Notes'; 
                 }
                 else if (viewName === 'archive') { 
                     state.currentFilter = 'archive'; 
-                    document.getElementById('notes-view-title').innerText = 'Archive'; 
+                    document.getElementById('notes-view-title').innerText = 'Archived Notes'; 
                 }
                 
                 if (viewName !== 'editor') state.currentNoteId = null;
                 updateUI();
-                document.getElementById('sidebar').classList.remove('open');
             },
             
             toggleTheme() {
@@ -936,7 +872,7 @@
                 toast.className = 'toast';
                 toast.innerHTML = `<i data-lucide="check-circle" style="color: var(--primary)"></i> <span>${message}</span>`;
                 container.appendChild(toast);
-                lucide.createIcons({ root: toast, attrs: { 'stroke-width': 2 } });
+                lucide.createIcons({ root: toast, attrs: { 'stroke-width': 2.5 } });
                 setTimeout(() => toast.remove(), 3500);
             },
             
@@ -952,10 +888,8 @@
             }
         };
 
-        // --- 6. RENDERING ---
         function updateUI() {
             app.updateGreeting();
-            
             const activeNotes = state.notes.filter(n => !n.isArchived);
             document.getElementById('stat-total').innerText = activeNotes.length;
             document.getElementById('stat-fav').innerText = state.notes.filter(n => n.isFavorite && !n.isArchived).length;
@@ -976,28 +910,30 @@
             container.innerHTML = '';
             
             if (notesArray.length === 0) {
-                container.innerHTML = `<p style="grid-column: 1/-1; text-align: center; padding: 60px; color: var(--text-muted); font-size: 1rem;">It's quiet here. Time to jot something down!</p>`;
+                container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 60px; color: var(--text-muted); border: 2px dashed var(--border-color); border-radius: var(--radius-lg);">No notes found. Create one to get started!</div>`;
                 return;
             }
 
-            notesArray.forEach(note => {
+            notesArray.forEach((note, index) => {
                 const date = new Date(note.updatedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-                const preview = note.plainText ? note.plainText.substring(0, 100) + '...' : 'Empty note';
+                const preview = note.plainText ? note.plainText.substring(0, 110) + '...' : 'Empty content...';
                 
                 const card = document.createElement('div');
                 card.className = 'note-card';
+                // Staggered animation delay dynamically generated
+                card.style.animationDelay = `${0.1 + (index * 0.05)}s`; 
                 card.onclick = () => app.openNote(note.id);
                 card.innerHTML = `
                     <div class="note-header">
                         <div class="note-title">${note.title || 'Untitled Note'}</div>
-                        <button class="icon-btn" onclick="app.toggleFavorite('${note.id}', event)" style="color: ${note.isFavorite ? 'var(--accent-orange)' : 'var(--text-muted)'}">
-                            <i data-lucide="star" style="fill: ${note.isFavorite ? 'var(--accent-orange)' : 'none'}"></i>
+                        <button class="icon-btn" onclick="app.toggleFavorite('${note.id}', event)" style="color: ${note.isFavorite ? '#F59E0B' : 'var(--text-muted)'}; background: transparent; border: none; padding: 4px; box-shadow: none;">
+                            <i data-lucide="star" style="fill: ${note.isFavorite ? '#F59E0B' : 'none'}"></i>
                         </button>
                     </div>
                     <div class="note-preview">${preview}</div>
                     <div class="note-footer">
                         <span>${date}</span>
-                        <div class="note-actions">
+                        <div class="note-actions" style="display: flex; gap: 8px;">
                             <button class="icon-btn" onclick="app.toggleArchive('${note.id}', event)" title="${note.isArchived ? 'Restore' : 'Archive'}">
                                 <i data-lucide="${note.isArchived ? 'refresh-cw' : 'archive'}"></i>
                             </button>
@@ -1009,29 +945,21 @@
                 `;
                 container.appendChild(card);
             });
-            lucide.createIcons({ root: container, attrs: { 'stroke-width': 2 } });
+            lucide.createIcons({ root: container, attrs: { 'stroke-width': 2.2 } });
         }
 
         function applyTheme() {
             document.documentElement.setAttribute('data-theme', state.theme);
-            
-            const themeBtnIcon = document.querySelector('.top-actions button[title="Toggle Theme"] i');
-            const sidebarThemeIcon = document.querySelector('.nav-item[onclick="app.toggleTheme()"] i');
-            
-            if (themeBtnIcon && sidebarThemeIcon) {
-                const iconName = state.theme === 'light' ? 'moon' : 'sun';
-                themeBtnIcon.setAttribute('data-lucide', iconName);
-                sidebarThemeIcon.setAttribute('data-lucide', iconName);
-                lucide.createIcons({ attrs: { 'stroke-width': 2 } });
-            }
+            const themeIcons = document.querySelectorAll('button[title="Toggle Theme"] i, .nav-item[onclick="app.toggleTheme()"] i');
+            const iconName = state.theme === 'light' ? 'moon' : 'sun';
+            themeIcons.forEach(icon => {
+                icon.setAttribute('data-lucide', iconName);
+            });
+            lucide.createIcons({ attrs: { 'stroke-width': 2.2 } });
         }
 
-        // --- 7. EVENT LISTENERS ---
         function setupEventListeners() {
-            document.getElementById('searchInput').addEventListener('input', (e) => {
-                app.handleSearch(e.target.value);
-            });
-
+            document.getElementById('searchInput').addEventListener('input', (e) => app.handleSearch(e.target.value));
             document.addEventListener('keydown', (e) => {
                 if (e.ctrlKey && e.key === 'n') { e.preventDefault(); app.createNewNote(); }
                 if (e.ctrlKey && e.key === 'k') { e.preventDefault(); document.getElementById('searchInput').focus(); }
