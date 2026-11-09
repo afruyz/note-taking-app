@@ -245,15 +245,18 @@
 
         .mobile-menu-btn { display: none; }
 
+        /* =========================================================
+           SEARCH BAR REFINEMENTS
+           ========================================================= */
         .search-container {
             position: relative;
             width: 320px;
-            display: flex;
-            align-items: center;
             background: var(--bg-color);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-md);
             transition: all var(--transition-normal);
+            display: flex;
+            align-items: center; /* Ensures the wrapper height behaves */
         }
         
         .search-container:focus-within {
@@ -265,22 +268,30 @@
         
         .search-container i {
             position: absolute;
-            left: 16px;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%); /* Perfect mathematical vertical centering */
             color: var(--text-muted);
             width: 18px;
             height: 18px;
+            pointer-events: none; /* Clicks pass through the icon to the input */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .search-container:focus-within i { color: var(--primary); }
         
         .search-input {
             width: 100%;
-            padding: 12px 16px 12px 44px;
+            padding: 12px 16px 12px 40px; /* 14px left + 18px icon + 8px gap = 40px */
             border: none;
             background: transparent;
             color: var(--text-main);
             font-size: 0.95rem;
             outline: none;
+            height: 100%;
+            border-radius: var(--radius-md);
         }
         
         .top-actions { display: flex; gap: 12px; align-items: center; }
@@ -461,7 +472,7 @@
         }
 
         /* =========================================================
-           EDITOR SPECIFIC REFINEMENTS (Perfect Icons & Boxes)
+           EDITOR SPECIFIC REFINEMENTS
            ========================================================= */
         .editor-container {
             max-width: 900px;
@@ -623,7 +634,6 @@
             padding: 8px !important;
         }
 
-        /* Dark Mode overrides for pickers */
         [data-theme="dark"] .ql-toolbar.ql-snow .ql-picker-options {
             background: var(--card-bg) !important;
         }
@@ -869,7 +879,6 @@
                         </button>
                     </div>
                 </div>
-                <!-- Toolbar will be inserted here by Quill automatically -->
                 <div id="editor-content"></div>
             </div>
         </section>
