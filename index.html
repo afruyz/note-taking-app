@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Afruyz Notes | Capture Ideas. Organize Life.</title>
+    
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Quill Rich Text Editor -->
@@ -26,7 +27,7 @@
             --accent-mint: #20C997;
             --accent-orange: #FFB86B;
             --accent-pink: #FF6B81;
-            --sidebar-width: 270px;
+            --sidebar-width: 280px;
             --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
             --shadow-md: 0 8px 16px -4px rgba(0,0,0,0.1);
             --shadow-glass: 0 8px 32px 0 rgba(108, 99, 255, 0.1);
@@ -50,7 +51,12 @@
             --glass-border: rgba(255, 255, 255, 0.05);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Inter', sans-serif; 
+        }
         
         body {
             background-color: var(--bg-color);
@@ -60,17 +66,6 @@
             overflow: hidden;
             transition: background-color var(--transition-normal), color var(--transition-normal);
         }
-
-        /* Utility Classes */
-        .glass-panel {
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--shadow-glass);
-        }
-        .flex-center { display: flex; align-items: center; justify-content: center; }
-        .hidden { display: none !important; }
 
         /* Typography */
         h1, h2, h3, h4 { color: var(--text-main); font-weight: 700; letter-spacing: -0.02em; }
@@ -85,32 +80,31 @@
             display: flex;
             flex-direction: column;
             transition: all var(--transition-normal);
-            z-index: 10;
+            z-index: 50;
         }
         
         .sidebar-header {
             padding: 28px 24px;
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 16px;
         }
         
-        /* Updated Logo Styles */
         .brand-logo {
-            width: 42px;
-            height: 42px;
+            width: 44px;
+            height: 44px;
             border-radius: 12px;
             object-fit: cover;
             box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3);
             transition: transform var(--transition-bounce), box-shadow var(--transition-fast);
             cursor: pointer;
         }
+        
         .brand-logo:hover {
-            transform: scale(1.1) rotate(5deg);
+            transform: scale(1.08) rotate(5deg);
             box-shadow: 0 6px 16px rgba(108, 99, 255, 0.5);
         }
 
-        /* Upgraded Brand Text */
         .brand-text { 
             font-size: 1.35rem; 
             font-weight: 800; 
@@ -120,31 +114,47 @@
             -webkit-text-fill-color: transparent;
         }
         
-        .nav-menu { padding: 12px; flex: 1; overflow-y: auto; }
+        .nav-menu { 
+            padding: 12px 16px; 
+            flex: 1; 
+            overflow-y: auto; 
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
         .nav-item {
             display: flex;
             align-items: center;
+            gap: 14px;
             padding: 14px 16px;
             border-radius: 10px;
             color: var(--text-main);
             text-decoration: none;
             cursor: pointer;
             transition: all var(--transition-fast);
-            margin-bottom: 6px;
             font-weight: 500;
             font-size: 0.95rem;
         }
-        .nav-item i { margin-right: 14px; color: var(--text-muted); width: 20px; transition: transform var(--transition-bounce); }
+
+        .nav-item i { 
+            color: var(--text-muted); 
+            width: 20px; 
+            height: 20px;
+            transition: transform var(--transition-bounce), color var(--transition-fast); 
+        }
         
         .nav-item:hover { 
             background-color: var(--bg-color); 
             transform: translateX(4px);
         }
+        
         .nav-item.active {
             background-color: var(--primary);
             color: white;
             box-shadow: 0 4px 12px rgba(108, 99, 255, 0.2);
         }
+        
         .nav-item.active i { color: white; }
         .nav-item:hover i { transform: scale(1.15); }
 
@@ -165,9 +175,19 @@
             transition: all var(--transition-bounce);
             box-shadow: 0 4px 15px rgba(108, 99, 255, 0.4);
         }
+
         .btn-new-note:hover {
             transform: translateY(-3px) scale(1.02);
             box-shadow: 0 8px 20px rgba(108, 99, 255, 0.5);
+        }
+
+        .settings-label {
+            margin: 24px 0 8px 8px; 
+            font-size: 0.75rem; 
+            text-transform: uppercase; 
+            color: var(--text-muted); 
+            font-weight: 700; 
+            letter-spacing: 0.5px;
         }
 
         /* Main Content */
@@ -186,32 +206,47 @@
             align-items: center;
             justify-content: space-between;
             border-bottom: 1px solid var(--border-color);
-            background-color: rgba(var(--bg-color), 0.8);
+            background-color: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(10px);
+            z-index: 40;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-main);
+            cursor: pointer;
+            padding: 8px;
         }
         
         .search-container {
             position: relative;
-            width: 450px;
+            width: 400px;
+            display: flex;
+            align-items: center;
             transition: width var(--transition-normal);
         }
+        
         .search-container:focus-within {
-            width: 500px;
+            width: 480px;
         }
+        
         .search-container i {
             position: absolute;
             left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
             color: var(--text-muted);
             width: 18px;
+            height: 18px;
             transition: color var(--transition-fast);
+            pointer-events: none;
         }
+        
         .search-container:focus-within i { color: var(--primary); }
         
         .search-input {
             width: 100%;
-            padding: 12px 20px 12px 46px;
+            padding: 12px 20px 12px 44px;
             border-radius: 24px;
             border: 2px solid transparent;
             background-color: var(--card-bg);
@@ -221,12 +256,18 @@
             box-shadow: var(--shadow-sm);
             transition: all var(--transition-fast);
         }
+        
         .search-input:focus { 
             border-color: var(--primary);
             box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.1);
         }
         
-        .top-actions { display: flex; gap: 12px; align-items: center; }
+        .top-actions { 
+            display: flex; 
+            gap: 14px; 
+            align-items: center; 
+        }
+        
         .icon-btn {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -234,14 +275,23 @@
             cursor: pointer;
             padding: 10px;
             border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: all var(--transition-bounce);
             box-shadow: var(--shadow-sm);
         }
+        
+        .icon-btn i {
+            width: 20px;
+            height: 20px;
+        }
+
         .icon-btn:hover { 
             background-color: var(--primary); 
             color: white; 
             border-color: var(--primary);
-            transform: translateY(-2px) rotate(8deg); 
+            transform: translateY(-2px) scale(1.05); 
             box-shadow: 0 4px 10px rgba(108, 99, 255, 0.3);
         }
 
@@ -252,22 +302,28 @@
             padding: 40px;
             display: none;
         }
-        .view-section.active { display: block; animation: fadeIn var(--transition-normal); }
+        
+        .view-section.active { 
+            display: block; 
+            animation: fadeIn var(--transition-normal); 
+        }
 
         @keyframes fadeIn { 
-            from { opacity: 0; transform: translateY(15px); } 
+            from { opacity: 0; transform: translateY(10px); } 
             to { opacity: 1; transform: translateY(0); } 
         }
 
         /* Dashboard */
-        .dashboard-header { margin-bottom: 40px; }
-        .dashboard-header h1 { font-size: 2.2rem; margin-bottom: 10px; }
+        .dashboard-header { margin-bottom: 32px; }
+        .dashboard-header h1 { font-size: 2.2rem; margin-bottom: 8px; }
+        
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 24px;
             margin-bottom: 48px;
         }
+        
         .stat-card {
             padding: 24px;
             border-radius: var(--radius-lg);
@@ -279,11 +335,13 @@
             transition: all var(--transition-bounce);
             box-shadow: var(--shadow-sm);
         }
+        
         .stat-card:hover { 
-            transform: translateY(-6px); 
+            transform: translateY(-4px); 
             box-shadow: var(--shadow-md); 
             border-color: var(--primary);
         }
+        
         .stat-icon {
             width: 56px;
             height: 56px;
@@ -291,19 +349,25 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
             color: white;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
+        
+        .stat-icon i {
+            width: 28px;
+            height: 28px;
+        }
+
         .stat-info h3 { font-size: 1.8rem; margin-bottom: 4px; line-height: 1; }
         .stat-info p { font-size: 0.95rem; font-weight: 500; margin: 0; }
 
         /* Notes Grid */
         .notes-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 24px;
         }
+        
         .note-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -317,16 +381,60 @@
             min-height: 220px;
             box-shadow: var(--shadow-sm);
         }
+        
         .note-card:hover { 
-            transform: translateY(-6px) scale(1.01); 
+            transform: translateY(-4px) scale(1.01); 
             box-shadow: var(--shadow-md); 
             border-color: var(--primary); 
         }
-        .note-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
-        .note-title { font-size: 1.2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px; line-height: 1.3;}
-        .note-preview { font-size: 1rem; color: var(--text-muted); flex: 1; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; line-height: 1.6;}
-        .note-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; font-size: 0.85rem; color: var(--text-muted); border-top: 1px solid var(--border-color); padding-top: 16px;}
-        .note-actions { display: flex; gap: 8px; }
+        
+        .note-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: flex-start; 
+            margin-bottom: 12px;
+            gap: 12px;
+        }
+        
+        .note-title { 
+            font-size: 1.2rem; 
+            font-weight: 700; 
+            color: var(--text-main); 
+            margin-bottom: 8px; 
+            line-height: 1.4;
+            display: -webkit-box; 
+            -webkit-line-clamp: 2; 
+            -webkit-box-orient: vertical; 
+            overflow: hidden;
+        }
+        
+        .note-preview { 
+            font-size: 0.95rem; 
+            color: var(--text-muted); 
+            flex: 1; 
+            overflow: hidden; 
+            display: -webkit-box; 
+            -webkit-line-clamp: 4; 
+            -webkit-box-orient: vertical; 
+            line-height: 1.6;
+        }
+        
+        .note-footer { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-top: 20px; 
+            font-size: 0.85rem; 
+            color: var(--text-muted); 
+            border-top: 1px solid var(--border-color); 
+            padding-top: 16px;
+        }
+        
+        .note-actions { 
+            display: flex; 
+            gap: 8px; 
+            align-items: center;
+        }
         
         .note-actions .icon-btn {
             padding: 8px;
@@ -334,6 +442,7 @@
             box-shadow: none;
             border: none;
         }
+        
         .note-actions .icon-btn:hover {
             background: var(--bg-color);
             color: var(--primary);
@@ -350,16 +459,19 @@
             border: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
-            height: calc(100vh - 150px);
+            height: calc(100vh - 140px);
             animation: fadeIn var(--transition-normal);
         }
+        
         .editor-header {
             padding: 24px 32px;
             border-bottom: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 20px;
         }
+        
         .editor-title-input {
             font-size: 1.8rem;
             font-weight: 700;
@@ -368,34 +480,81 @@
             color: var(--text-main);
             outline: none;
             width: 100%;
+            font-family: 'Inter', sans-serif;
         }
+        
         .editor-title-input::placeholder { color: var(--text-muted); opacity: 0.5; }
         
-        #editor-content { flex: 1; overflow-y: auto; font-size: 1.1rem; }
-        .ql-toolbar.ql-snow { border: none !important; border-bottom: 1px solid var(--border-color) !important; background: var(--bg-color); border-radius: 0; padding: 14px 32px !important;}
-        .ql-container.ql-snow { border: none !important; font-family: 'Inter', sans-serif; font-size: 1.1rem;}
-        .ql-editor { padding: 32px; min-height: 100%; }
+        #editor-content { flex: 1; overflow-y: auto; font-size: 1.05rem; }
         
+        .ql-toolbar.ql-snow { 
+            border: none !important; 
+            border-bottom: 1px solid var(--border-color) !important; 
+            background: var(--bg-color); 
+            border-radius: 0; 
+            padding: 14px 32px !important;
+        }
+        
+        .ql-container.ql-snow { 
+            border: none !important; 
+            font-family: 'Inter', sans-serif; 
+            font-size: 1.05rem;
+        }
+        
+        .ql-editor { padding: 32px; min-height: 100%; }
+
         /* Toast */
-        #toast-container { position: fixed; bottom: 32px; right: 32px; z-index: 9999; display: flex; flex-direction: column; gap: 12px; }
+        #toast-container { 
+            position: fixed; 
+            bottom: 32px; 
+            right: 32px; 
+            z-index: 9999; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 12px; 
+        }
+        
         .toast {
-            background: var(--card-bg); border-left: 5px solid var(--primary);
-            padding: 16px 24px; border-radius: 12px; box-shadow: var(--shadow-md);
-            color: var(--text-main); font-weight: 600; font-size: 0.95rem;
-            display: flex; align-items: center; gap: 14px;
+            background: var(--card-bg); 
+            border-left: 5px solid var(--primary);
+            padding: 16px 24px; 
+            border-radius: 12px; 
+            box-shadow: var(--shadow-md);
+            color: var(--text-main); 
+            font-weight: 600; 
+            font-size: 0.95rem;
+            display: flex; 
+            align-items: center; 
+            gap: 14px;
             animation: slideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, fadeOut 0.3s forwards 3s;
         }
+        
         @keyframes slideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         @keyframes fadeOut { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(10px); } }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            #sidebar { position: absolute; transform: translateX(-100%); box-shadow: var(--shadow-md); }
+        @media (max-width: 900px) {
+            .mobile-menu-btn {
+                display: block;
+                margin-right: 16px;
+            }
+            
+            #sidebar { 
+                position: absolute; 
+                transform: translateX(-100%); 
+                box-shadow: var(--shadow-md); 
+            }
+            
             #sidebar.open { transform: translateX(0); }
-            .search-container { width: 220px; }
-            .search-container:focus-within { width: 280px; }
-            .view-section { padding: 20px; }
+            
+            .top-bar { padding: 0 20px; }
+            
+            .search-container { width: 100%; max-width: 250px; }
+            .search-container:focus-within { width: 100%; max-width: 300px; }
+            
+            .view-section { padding: 24px; }
             .notes-grid { grid-template-columns: 1fr; }
+            .editor-container { height: calc(100vh - 100px); }
         }
     </style>
 </head>
@@ -404,13 +563,14 @@
     <!-- Sidebar -->
     <aside id="sidebar">
         <div class="sidebar-header">
-            <!-- Inserted custom Logo Image -->
             <img src="https://i.pinimg.com/736x/0d/ab/d9/0dabd91337f32a9e696c108dc694f756.jpg" alt="Afruyz Notes Logo" class="brand-logo" title="Afruyz Notes">
             <div class="brand-text">Afruyz Notes</div>
         </div>
+        
         <button class="btn-new-note" onclick="app.createNewNote()">
             <i data-lucide="plus"></i> New Note
         </button>
+        
         <nav class="nav-menu">
             <a class="nav-item active" data-view="dashboard" onclick="app.switchView('dashboard')">
                 <i data-lucide="layout-dashboard"></i> Dashboard
@@ -424,7 +584,8 @@
             <a class="nav-item" data-view="archive" onclick="app.switchView('archive')">
                 <i data-lucide="archive"></i> Archive
             </a>
-            <div style="margin: 28px 0 12px 16px; font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700; letter-spacing: 0.5px;">Settings</div>
+            
+            <div class="settings-label">Settings</div>
             <a class="nav-item" onclick="app.toggleTheme()">
                 <i data-lucide="moon"></i> Toggle Theme
             </a>
@@ -434,13 +595,23 @@
     <!-- Main Content -->
     <main id="main-content">
         <header class="top-bar">
-            <div class="search-container">
-                <i data-lucide="search"></i>
-                <input type="text" id="searchInput" class="search-input" placeholder="Search notes... (Ctrl+K)">
+            <div style="display: flex; align-items: center;">
+                <button class="mobile-menu-btn" onclick="app.toggleSidebar()">
+                    <i data-lucide="menu"></i>
+                </button>
+                <div class="search-container">
+                    <i data-lucide="search"></i>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Search notes... (Ctrl+K)">
+                </div>
             </div>
+            
             <div class="top-actions">
-                <button class="icon-btn" onclick="app.createNewNote()" title="New Note"><i data-lucide="edit-3"></i></button>
-                <button class="icon-btn" onclick="app.toggleTheme()" title="Toggle Theme"><i data-lucide="sun"></i></button>
+                <button class="icon-btn" onclick="app.createNewNote()" title="New Note">
+                    <i data-lucide="edit-3"></i>
+                </button>
+                <button class="icon-btn" onclick="app.toggleTheme()" title="Toggle Theme">
+                    <i data-lucide="sun"></i>
+                </button>
             </div>
         </header>
 
@@ -453,21 +624,27 @@
             
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-icon" style="background: linear-gradient(135deg, var(--primary), var(--secondary));"><i data-lucide="file-text"></i></div>
+                    <div class="stat-icon" style="background: linear-gradient(135deg, var(--primary), var(--secondary));">
+                        <i data-lucide="file-text"></i>
+                    </div>
                     <div class="stat-info">
                         <h3 id="stat-total">0</h3>
                         <p>Total Notes</p>
                     </div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon" style="background: linear-gradient(135deg, #FFA047, var(--accent-orange));"><i data-lucide="star"></i></div>
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #FFA047, var(--accent-orange));">
+                        <i data-lucide="star"></i>
+                    </div>
                     <div class="stat-info">
                         <h3 id="stat-fav">0</h3>
                         <p>Favorites</p>
                     </div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon" style="background: linear-gradient(135deg, #10B981, var(--accent-mint));"><i data-lucide="archive"></i></div>
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #10B981, var(--accent-mint));">
+                        <i data-lucide="archive"></i>
+                    </div>
                     <div class="stat-info">
                         <h3 id="stat-archived">0</h3>
                         <p>Archived</p>
@@ -497,8 +674,12 @@
                 <div class="editor-header">
                     <input type="text" id="note-title-input" class="editor-title-input" placeholder="Title your thoughts...">
                     <div class="note-actions">
-                        <button class="icon-btn" id="btn-save-note" onclick="app.saveCurrentNote()" title="Save (Ctrl+S)"><i data-lucide="save"></i></button>
-                        <button class="icon-btn" onclick="app.switchView('notes')" title="Close"><i data-lucide="x"></i></button>
+                        <button class="icon-btn" id="btn-save-note" onclick="app.saveCurrentNote()" title="Save (Ctrl+S)">
+                            <i data-lucide="save"></i>
+                        </button>
+                        <button class="icon-btn" onclick="app.switchView('notes')" title="Close">
+                            <i data-lucide="x"></i>
+                        </button>
                     </div>
                 </div>
                 <div id="editor-content"></div>
@@ -538,7 +719,7 @@
         function initDB() {
             return new Promise((resolve, reject) => {
                 const request = indexedDB.open(DB_NAME, DB_VERSION);
-                request.onerror = (e) => reject('IndexedDB error');
+                request.onerror = () => reject('IndexedDB error');
                 request.onsuccess = (e) => { db = e.target.result; resolve(); };
                 request.onupgradeneeded = (e) => {
                     const database = e.target.result;
@@ -596,7 +777,7 @@
                     ]
                 }
             });
-            // Auto-save on change (debounced)
+            
             let timeout;
             quill.on('text-change', () => {
                 if(!state.currentNoteId) return;
@@ -615,6 +796,10 @@
                 else greetingEl.innerText = 'Good Evening!';
             },
             
+            toggleSidebar() {
+                document.getElementById('sidebar').classList.toggle('open');
+            },
+
             async createNewNote() {
                 const newNote = {
                     id: Date.now().toString(),
@@ -632,6 +817,9 @@
                 this.openNote(newNote.id);
                 this.showToast('New note created');
                 updateUI();
+                
+                // Close sidebar on mobile if open
+                document.getElementById('sidebar').classList.remove('open');
             },
             
             openNote(id) {
@@ -698,12 +886,24 @@
                 const activeNav = document.querySelector(`.nav-item[data-view="${viewName}"]`);
                 if(activeNav) activeNav.classList.add('active');
 
-                if (viewName === 'notes') { state.currentFilter = 'all'; document.getElementById('notes-view-title').innerText = 'All Notes'; }
-                else if (viewName === 'favorites') { state.currentFilter = 'favorites'; document.getElementById('notes-view-title').innerText = 'Favorites'; }
-                else if (viewName === 'archive') { state.currentFilter = 'archive'; document.getElementById('notes-view-title').innerText = 'Archive'; }
+                if (viewName === 'notes') { 
+                    state.currentFilter = 'all'; 
+                    document.getElementById('notes-view-title').innerText = 'All Notes'; 
+                }
+                else if (viewName === 'favorites') { 
+                    state.currentFilter = 'favorites'; 
+                    document.getElementById('notes-view-title').innerText = 'Favorites'; 
+                }
+                else if (viewName === 'archive') { 
+                    state.currentFilter = 'archive'; 
+                    document.getElementById('notes-view-title').innerText = 'Archive'; 
+                }
                 
                 if (viewName !== 'editor') state.currentNoteId = null;
                 updateUI();
+
+                // Close sidebar on mobile after clicking
+                document.getElementById('sidebar').classList.remove('open');
             },
             
             toggleTheme() {
@@ -728,7 +928,7 @@
                     (n.title.toLowerCase().includes(q) || n.plainText.toLowerCase().includes(q)) && !n.isArchived
                 );
                 renderNotesGrid(filtered, 'main-notes-grid');
-                if(document.getElementById('view-notes').classList.contains('active') === false) {
+                if(!document.getElementById('view-notes').classList.contains('active')) {
                     this.switchView('notes');
                 }
             }
@@ -738,16 +938,13 @@
         function updateUI() {
             app.updateGreeting();
             
-            // Update Dashboard Stats
             const activeNotes = state.notes.filter(n => !n.isArchived);
             document.getElementById('stat-total').innerText = activeNotes.length;
             document.getElementById('stat-fav').innerText = state.notes.filter(n => n.isFavorite && !n.isArchived).length;
             document.getElementById('stat-archived').innerText = state.notes.filter(n => n.isArchived).length;
             
-            // Render Recent
             renderNotesGrid(activeNotes.slice(0, 3), 'recent-notes-grid');
             
-            // Render Main List based on filter
             let filteredNotes = [];
             if(state.currentFilter === 'all') filteredNotes = activeNotes;
             else if(state.currentFilter === 'favorites') filteredNotes = activeNotes.filter(n => n.isFavorite);
@@ -799,16 +996,25 @@
 
         function applyTheme() {
             document.documentElement.setAttribute('data-theme', state.theme);
+            
+            // Sync theme toggle icon
+            const themeBtnIcon = document.querySelector('.top-actions button[title="Toggle Theme"] i');
+            const sidebarThemeIcon = document.querySelector('.nav-item[onclick="app.toggleTheme()"] i');
+            
+            if (themeBtnIcon && sidebarThemeIcon) {
+                const iconName = state.theme === 'light' ? 'moon' : 'sun';
+                themeBtnIcon.setAttribute('data-lucide', iconName);
+                sidebarThemeIcon.setAttribute('data-lucide', iconName);
+                lucide.createIcons();
+            }
         }
 
         // --- 7. EVENT LISTENERS ---
         function setupEventListeners() {
-            // Search
             document.getElementById('searchInput').addEventListener('input', (e) => {
                 app.handleSearch(e.target.value);
             });
 
-            // Keyboard Shortcuts
             document.addEventListener('keydown', (e) => {
                 if (e.ctrlKey && e.key === 'n') { e.preventDefault(); app.createNewNote(); }
                 if (e.ctrlKey && e.key === 'k') { e.preventDefault(); document.getElementById('searchInput').focus(); }
@@ -816,7 +1022,6 @@
             });
         }
 
-        // Export app globally for inline HTML handlers
         window.app = app;
     </script>
 </body>
